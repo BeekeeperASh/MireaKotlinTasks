@@ -1,7 +1,7 @@
 package alvshinev.application.mireakotlintasks
 
-import alvshinev.application.mireakotlintasks.ui.MainScreen
-import alvshinev.application.mireakotlintasks.ui.TestComposable
+import alvshinev.application.mireakotlintasks.presentation.ui.MainScreen
+import alvshinev.application.mireakotlintasks.presentation.ui.TestComposable
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-            MainScreen()
+            MainScreen(viewModel = viewModel())
 
         }
     }

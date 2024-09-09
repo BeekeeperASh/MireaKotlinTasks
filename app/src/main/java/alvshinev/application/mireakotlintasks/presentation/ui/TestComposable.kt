@@ -1,4 +1,4 @@
-package alvshinev.application.mireakotlintasks.ui
+package alvshinev.application.mireakotlintasks.presentation.ui
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text

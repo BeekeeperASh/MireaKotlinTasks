@@ -1,4 +1,4 @@
-package alvshinev.application.mireakotlintasks.ui
+package alvshinev.application.mireakotlintasks.presentation.ui
 
 import alvshinev.application.mireakotlintasks.R
 import androidx.compose.foundation.layout.Box
@@ -10,13 +10,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 
 @Composable
-fun NewsScreen(){
+fun HomeScreen(){
 
     Box (
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = stringResource(id = R.string.news_screen))
+        Text(text = stringResource(id = R.string.home_screen))
     }
 
 }
