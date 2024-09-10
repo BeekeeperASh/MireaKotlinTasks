@@ -1,42 +1,58 @@
 package alvshinev.application.mireakotlintasks
 
 import alvshinev.application.mireakotlintasks.presentation.ui.MainScreen
-import alvshinev.application.mireakotlintasks.presentation.ui.TestComposable
+import android.Manifest
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.sp
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.camera.core.ImageCapture.OnImageCapturedCallback
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.ImageProxy
+import androidx.camera.view.CameraController
+import androidx.camera.view.LifecycleCameraController
+import androidx.compose.runtime.remember
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
 import kotlinx.serialization.Serializable
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (!hasRequiredPermissions()) {
+            ActivityCompat.requestPermissions(
+                this,
+                PERMISSIONS,
+                0
+            )
+        }
+
         setContent {
 
-            MainScreen(viewModel = viewModel())
+            MainScreen(
+                viewModel = viewModel(),
+                context = applicationContext
+            )
 
         }
     }
+
+    private fun hasRequiredPermissions(): Boolean {
+        return PERMISSIONS.all {
+            ContextCompat.checkSelfPermission(
+                applicationContext,
+                it
+            ) == PackageManager.PERMISSION_GRANTED
+        }
+    }
+
+    companion object {
+        private val PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+    }
+
 }
 
 @Serializable

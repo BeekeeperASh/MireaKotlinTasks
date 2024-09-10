@@ -12,4 +12,10 @@ sealed class Destination {
 
     @Serializable
     object NewsScreen : Destination()
+
+    @Serializable
+    object CameraScreen : Destination()
+
+    @Serializable
+    object DatesScreen: Destination()
 }
