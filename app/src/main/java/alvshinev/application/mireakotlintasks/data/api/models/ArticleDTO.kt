@@ -1,5 +1,6 @@
 package alvshinev.application.mireakotlintasks.data.api.models
 
+import alvshinev.application.mireakotlintasks.data.api.utils.DateTimeUTCSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.util.Date

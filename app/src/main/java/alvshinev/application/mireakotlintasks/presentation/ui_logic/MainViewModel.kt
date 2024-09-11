@@ -1,22 +1,33 @@
 package alvshinev.application.mireakotlintasks.presentation.ui_logic
 
-import alvshinev.application.mireakotlintasks.data.ArticlesRepository
-import alvshinev.application.mireakotlintasks.data.model.Article
 import alvshinev.application.mireakotlintasks.domain.GetArticlesUseCase
-import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+import javax.inject.Provider
 
-class MainViewModel (
-    private val getArticlesUseCase: GetArticlesUseCase = GetArticlesUseCase(ArticlesRepository()),
+@HiltViewModel
+class MainViewModel @Inject internal constructor (
+    private val getArticlesUseCase: Provider<GetArticlesUseCase>,
 ) : ViewModel() {
 
-    private val _articles = MutableStateFlow<List<Article>>(listOf())
-    val articles: StateFlow<List<Article>> = _articles
+    private val _state = MutableStateFlow<State>(State.None)
+    val state: StateFlow<State> = _state
 
-    fun loadNews() {
-        _articles.value = getArticlesUseCase.invoke()
+    fun loadNews(query: String) {
+        viewModelScope.launch {
+            getArticlesUseCase.get().invoke(query).collect {
+                _state.value = it.toState()
+            }
+        }
     }
 
 }

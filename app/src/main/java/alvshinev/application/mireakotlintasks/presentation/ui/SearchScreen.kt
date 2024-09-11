@@ -18,7 +18,9 @@ fun SearchScreen(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Button(onClick = { viewModel.loadNews() }) {
+        Button(onClick = {
+            viewModel.loadNews("Finance")
+        }) {
             Text(text = "Search news")
         }
     }

@@ -20,10 +20,14 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "NEWS_API_KEY", "\"58753ced6434441487fad9aad21f63e0\"")
+        buildConfigField("String", "NEWS_API_BASE_URL", "\"https://newsapi.org/v2/\"")
     }
 
     buildFeatures{
         compose = true
+        buildConfig = true
     }
 
     composeOptions {
@@ -117,4 +121,6 @@ dependencies {
 
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+    implementation(libs.kotlinx.immutable)
 }
