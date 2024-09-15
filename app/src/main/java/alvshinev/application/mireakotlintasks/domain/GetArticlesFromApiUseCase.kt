@@ -6,7 +6,7 @@ import alvshinev.application.mireakotlintasks.data.model.Article
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetArticlesUseCase @Inject constructor(
+class GetArticlesFromApiUseCase @Inject constructor(
     private val repository: ArticlesRepository
 ) {
 
