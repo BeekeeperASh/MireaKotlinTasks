@@ -18,4 +18,10 @@ sealed class Destination {
 
     @Serializable
     object DatesScreen: Destination()
+
+    @Serializable
+    object LaunchImageScreen: Destination()
+
+    @Serializable
+    object ComposeSample: Destination()
 }

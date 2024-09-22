@@ -159,6 +159,12 @@ fun MainScreen(
                     composable<Destination.DatesScreen> {
                         DatesScreen(context = context)
                     }
+                    composable<Destination.LaunchImageScreen> {
+                        LaunchingImage()
+                    }
+                    composable<Destination.ComposeSample> {
+                        ComposeSample()
+                    }
                     composable<FirstScreen> {
                         Box(
                             modifier = Modifier.fillMaxSize(),

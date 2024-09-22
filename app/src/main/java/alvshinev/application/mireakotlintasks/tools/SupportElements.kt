@@ -7,12 +7,14 @@ import androidx.compose.material.icons.filled.Camera
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Photo
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.CalendarMonth
 import androidx.compose.material.icons.outlined.Camera
 import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.MoreVert
+import androidx.compose.material.icons.outlined.Photo
 import androidx.compose.material.icons.outlined.Search
 
 object SupportElements {
@@ -69,6 +71,18 @@ object SupportElements {
             unselectedIcon = Icons.Outlined.CalendarMonth,
             destination = Destination.DatesScreen
         ),
+        NavigationItem(
+            title = "Image Url",
+            selectedIcon = Icons.Filled.Photo,
+            unselectedIcon = Icons.Outlined.Photo,
+            destination = Destination.LaunchImageScreen
+        ),
+        NavigationItem(
+            title = "Compose Sample",
+            selectedIcon = Icons.Filled.Face,
+            unselectedIcon = Icons.Outlined.Face,
+            destination = Destination.ComposeSample
+        )
     )
 
 }

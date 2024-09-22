@@ -123,4 +123,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
     implementation(libs.kotlinx.immutable)
+
+    implementation(libs.coil.core)
+    implementation(libs.coil.compose)
 }
