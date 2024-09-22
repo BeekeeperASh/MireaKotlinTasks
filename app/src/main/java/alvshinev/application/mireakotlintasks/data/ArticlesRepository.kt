@@ -3,6 +3,7 @@ package alvshinev.application.mireakotlintasks.data
 import alvshinev.application.mireakotlintasks.data.api.NewsApi
 import alvshinev.application.mireakotlintasks.data.api.models.ArticleDTO
 import alvshinev.application.mireakotlintasks.data.api.models.ResponseDTO
+import alvshinev.application.mireakotlintasks.data.api.models.SortBy
 import alvshinev.application.mireakotlintasks.data.database.NewsDatabase
 import alvshinev.application.mireakotlintasks.data.database.models.ArticleDBO
 import alvshinev.application.mireakotlintasks.data.model.Article
@@ -25,13 +26,23 @@ class ArticlesRepository @Inject constructor(
     fun getNewsFromApi(query: String): Flow<RequestResult<List<Article>>> {
 
         val apiRequest =
-            flow { emit(api.everything(query = query)) }
+            flow {
+                emit(
+                    api.everything(
+                        query = query,
+                        sortBy = SortBy.PUBLISHED_AT
+                    )
+                )
+            }
                 .onEach { result ->
                     if (result.isSuccess) saveArticlesToDb(result.getOrThrow().articles)
                 }
                 .onEach { result ->
                     if (result.isFailure) {
-                        Log.e("Api", "Error getting data from server. Cause = ${result.exceptionOrNull()}")
+                        Log.e(
+                            "Api",
+                            "Error getting data from server. Cause = ${result.exceptionOrNull()}"
+                        )
                     }
                 }
                 .map { it.toRequestResult() }
@@ -41,6 +52,22 @@ class ArticlesRepository @Inject constructor(
             .map { result: RequestResult<ResponseDTO<ArticleDTO>> ->
                 result.map { response -> response.articles.map { it.toArticle() } }
             }
+    }
+
+    fun saveNewsFromApiToDb(query: String) {
+        val apiRequest =
+            flow { emit(api.everything(query = query)) }
+                .onEach { result ->
+                    if (result.isSuccess) saveArticlesToDb(result.getOrThrow().articles)
+                }
+                .onEach { result ->
+                    if (result.isFailure) {
+                        Log.e(
+                            "Api",
+                            "Error getting data from server. Cause = ${result.exceptionOrNull()}"
+                        )
+                    }
+                }
     }
 
     fun getNewsFromDatabase(): Flow<RequestResult<List<Article>>> {

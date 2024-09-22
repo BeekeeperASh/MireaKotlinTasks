@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ArticlesDao {
 
-    @Query("SELECT * FROM articles")
+    @Query("SELECT * FROM articles ORDER BY publishedAt DESC")
     suspend fun getAll(): List<ArticleDBO>
 
     @Query("SELECT * FROM articles")

@@ -1,4 +1,4 @@
-package alvshinev.application.mireakotlintasks.domain
+package alvshinev.application.mireakotlintasks.domain.usecases
 
 import alvshinev.application.mireakotlintasks.data.ArticlesRepository
 import javax.inject.Inject

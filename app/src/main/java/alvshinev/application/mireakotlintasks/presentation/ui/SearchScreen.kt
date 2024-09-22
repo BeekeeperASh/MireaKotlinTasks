@@ -14,18 +14,19 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 
 @Composable
 fun SearchScreen(
     viewModel: MainViewModel
 ) {
-
+    val context = LocalContext.current
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         var input by rememberSaveable {
-            mutableStateOf("")
+            mutableStateOf(viewModel.getRequestFromPrefs(context))
         }
         OutlinedTextField(
             modifier = Modifier.align(Alignment.TopCenter),
@@ -39,6 +40,7 @@ fun SearchScreen(
         )
         Button(onClick = {
             viewModel.loadNewsFromApi(input)
+            viewModel.saveRequestToPrefs(input, context)
         }) {
             Text(text = "Search news")
         }

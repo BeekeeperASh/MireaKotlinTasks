@@ -68,6 +68,13 @@ fun NewsScreen(
                                     fontSize = 16.sp
                                 )
                             )
+                            Text(
+                                text = "Published at ${article.publishedAt}",
+                                style = TextStyle(
+                                    fontWeight = FontWeight.Normal,
+                                    fontSize = 12.sp
+                                )
+                            )
                         }
                     }
                 }
